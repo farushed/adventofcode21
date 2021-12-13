@@ -88,6 +88,24 @@ def part2():
     print(len(closed_paths))
     # print("\n".join(sorted(closed_paths)))
 
+def part2_dfs():
+    connections = read()
+    print(dfs(connections, ["start"], "end"))
+
+def dfs(g, visited, end):
+    count = 0
+
+    for c in g[visited[-1]]:
+        if c == end:
+            count += 1
+            continue
+        if can_visit_2(visited, c):
+            new_visited = visited + [c]
+            count += dfs(g, new_visited, end)
+    return count
+
+
 if __name__ == "__main__":
     # part1()
-    part2()
+    # part2()
+    part2_dfs()
